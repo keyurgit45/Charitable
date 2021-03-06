@@ -118,14 +118,6 @@ class _MyDonationsState extends State<MyDonations> {
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.black,
-                          //     offset: Offset(2.0, 2.0), //(x,y)
-                          //     blurRadius: 2.0,
-                          //   ),
-                          // ],
-
                           border:
                               Border.all(width: 0.9, color: Colors.blue[600]),
                           borderRadius: BorderRadius.circular(10)),

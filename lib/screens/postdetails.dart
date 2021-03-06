@@ -340,35 +340,37 @@ class _PostDetailsState extends State<PostDetails> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 0.7),
-                        borderRadius: BorderRadius.circular(9)),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => UploadedImages(
-                                      photourls: userdata["Photourls"]))),
-                          child: Text(
-                            " Images (Click to  View) ",
-                            style: TextStyle(fontSize: 21),
+                userdata["Category"] == "Blood"
+                    ? SizedBox(height: 0)
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 0.7),
+                              borderRadius: BorderRadius.circular(9)),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.93,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => UploadedImages(
+                                            photourls: userdata["Photourls"]))),
+                                child: Text(
+                                  " Images (Click to  View) ",
+                                  style: TextStyle(fontSize: 21),
+                                ),
+                              ),
+                              Icon(
+                                Icons.image,
+                                size: 35,
+                              ),
+                            ],
                           ),
                         ),
-                        Icon(
-                          Icons.image,
-                          size: 35,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
                 SizedBox(
                   height: 20,
                 ),

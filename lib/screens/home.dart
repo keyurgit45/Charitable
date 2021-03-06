@@ -45,8 +45,24 @@ class _HomeState extends State<Home> {
     users = FirebaseFirestore.instance.collection(emailvalue);
     photoUrl = FirebaseAuth.instance.currentUser.photoURL;
     name = FirebaseAuth.instance.currentUser.displayName;
-    print(name);
-    setState(() {});
+
+    if (name.length == 0) {
+      await getname(emailvalue);
+    }
+    setState(() {
+      print(name);
+    });
+  }
+
+  getname(emailvalue1) async {
+    CollectionReference user =
+        FirebaseFirestore.instance.collection(emailvalue1);
+
+    await user.get().then((QuerySnapshot querySnapshot) => {
+          querySnapshot.docs.forEach((doc) {
+            name = doc.data()["Name"].toString();
+          })
+        });
   }
 
   int currentTab = 0; // to keep track of active tab index
@@ -76,11 +92,7 @@ class _HomeState extends State<Home> {
               child: Icon(Icons.logout),
               onTap: () async {
                 print(emailvalue);
-                // await users.get().then((snapshot) {
-                //   for (DocumentSnapshot ds in snapshot.docs) {
-                //     ds.reference.delete();
-                //   }
-                // });
+
                 sharedPreferences.clear();
                 // ignore: deprecated_member_use
                 sharedPreferences.commit();
@@ -94,11 +106,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
@@ -117,7 +125,7 @@ class _HomeState extends State<Home> {
                         name == null ? "UserName" : name,
                         style: TextStyle(color: Colors.white, fontSize: 21),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -133,6 +141,16 @@ class _HomeState extends State<Home> {
               title: Text('Help and Support'),
               onTap: () => showInSnackBar("Feature Not Unlocked Yet!"),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.50,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(13.0),
+              child: Text(
+                "Click on the post to get more Information",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            )
           ],
         ),
       ),

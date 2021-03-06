@@ -19,7 +19,7 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  String username;
+  String username = "user1";
   String useremail;
   String phone;
   String titleofpost;
@@ -35,8 +35,8 @@ class _DetailsState extends State<Details> {
   onPressed() async {
     SharedPreferences sharedPref = await SharedPreferences.getInstance();
     useremail = sharedPref.getString("email");
-    // username = sharedPref.getString("name");
-    // phone = sharedPref.getString("contact");
+    username = sharedPref.getString("name");
+    phone = sharedPref.getString("contact");
     CollectionReference user = FirebaseFirestore.instance.collection("posts");
 
     await user.get().then((QuerySnapshot querySnapshot) => {
@@ -45,11 +45,18 @@ class _DetailsState extends State<Details> {
             phone = doc.data()["Contact Number"];
           })
         });
+    if (widget.title == "Blood") {
+      ph1 = true;
+      ph2 = true;
+      ph3 = true;
+    }
 
     if (titleofpost != null &&
         pickupfrom != null &&
         description != null &&
-        ph1) {
+        ph1 &&
+        ph2 &&
+        ph3) {
       CollectionReference posts =
           FirebaseFirestore.instance.collection("posts");
       print("1");
@@ -94,9 +101,12 @@ class _DetailsState extends State<Details> {
       print(e);
       return;
     }
+    print(image.exists());
+    var now = new DateTime.now();
+    print(now.toString().substring(0, 16));
 
     //Create a reference to the location you want to upload to in firebase
-    var reference = storage.ref().child("$useremail/image$no");
+    var reference = storage.ref().child("$useremail/$now/image$no");
     showInSnackBar("Uploading....");
     //Upload the file to firebase
     var uploadTask = reference.putFile(image);
@@ -332,67 +342,70 @@ class _DetailsState extends State<Details> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 0.7),
-                        borderRadius: BorderRadius.circular(9)),
-                    height: 100,
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Upload Images (at least 3) *",
-                            style: TextStyle(fontSize: 21),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                widget.title == "Blood"
+                    ? SizedBox(height: 0)
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 0.7),
+                              borderRadius: BorderRadius.circular(9)),
+                          height: 100,
+                          width: MediaQuery.of(context).size.width * 0.93,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              InkWell(
-                                onTap: () {
-                                  uploadPhoto(1);
-                                },
-                                child: Icon(
-                                  Icons.upload_file,
-                                  color: ph1 ? Colors.blue : Colors.black,
-                                  size: 35,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Upload Images *",
+                                  style: TextStyle(fontSize: 21),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  uploadPhoto(2);
-                                },
-                                child: Icon(
-                                  Icons.upload_file,
-                                  color: ph2 ? Colors.blue : Colors.black,
-                                  size: 35,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        uploadPhoto(1);
+                                      },
+                                      child: Icon(
+                                        Icons.upload_file,
+                                        color: ph1 ? Colors.blue : Colors.black,
+                                        size: 35,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        uploadPhoto(2);
+                                      },
+                                      child: Icon(
+                                        Icons.upload_file,
+                                        color: ph2 ? Colors.blue : Colors.black,
+                                        size: 35,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        uploadPhoto(3);
+                                      },
+                                      child: Icon(
+                                        Icons.upload_file,
+                                        color: ph3 ? Colors.blue : Colors.black,
+                                        size: 35,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  uploadPhoto(3);
-                                },
-                                child: Icon(
-                                  Icons.upload_file,
-                                  color: ph3 ? Colors.blue : Colors.black,
-                                  size: 35,
-                                ),
-                              ),
+                              )
                             ],
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                        ),
+                      ),
                 SizedBox(
                   height: 20,
                 ),

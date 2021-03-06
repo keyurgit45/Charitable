@@ -86,14 +86,7 @@ class _ProfileState extends State<Profile> {
                                     left: 25.0,
                                     right: 25.0),
                                 child: TextField(
-                                  // onChanged: (val) {
-                                  //   username = val;
-                                  // },
-
                                   readOnly: true,
-                                  // readOnly: widget.cName[1] == null ? false : true,
-                                  // cursorColor: Colors.white,
-                                  // keyboardType: TextInputType.emailAddress,
                                   style: TextStyle(
                                       fontFamily: "WorkSansSemiBold",
                                       fontSize: 16.0,
@@ -122,8 +115,6 @@ class _ProfileState extends State<Profile> {
                                     right: 25.0),
                                 child: TextField(
                                   readOnly: true,
-                                  // cursorColor: Colors.white,
-                                  // keyboardType: TextInputType.emailAddress,
                                   style: TextStyle(
                                       fontFamily: "WorkSansSemiBold",
                                       fontSize: 16.0,
@@ -136,7 +127,6 @@ class _ProfileState extends State<Profile> {
                                       size: 22.0,
                                     ),
                                     hintText: profiledata["Email"],
-                                    // widget.cName[0] == null ? "Null" : widget.cName[0],
                                     hintStyle: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "WorkSansSemiBold",
@@ -152,11 +142,6 @@ class _ProfileState extends State<Profile> {
                                     right: 25.0),
                                 child: TextField(
                                   readOnly: true,
-                                  // onChanged: (val) {
-                                  //   phone = val;
-                                  // },
-                                  // cursorColor: Colors.white,
-                                  // keyboardType: TextInputType.emailAddress,
                                   style: TextStyle(
                                       fontFamily: "WorkSansSemiBold",
                                       fontSize: 16.0,
@@ -184,12 +169,8 @@ class _ProfileState extends State<Profile> {
                                     right: 25.0),
                                 child: TextField(
                                   readOnly: true,
-                                  // onChanged: (val) {
-                                  //   address = val;
-                                  // },
                                   cursorColor: Colors.white,
                                   maxLines: 2,
-                                  // keyboardType: TextInputType.emailAddress,
                                   style: TextStyle(
                                       fontFamily: "WorkSansSemiBold",
                                       fontSize: 16.0,
@@ -217,11 +198,6 @@ class _ProfileState extends State<Profile> {
                                     right: 25.0),
                                 child: TextField(
                                   readOnly: true,
-                                  // onChanged: (val) {
-                                  //   city = val;
-                                  // },
-                                  // cursorColor: Colors.white,
-                                  // keyboardType: TextInputType.emailAddress,
                                   style: TextStyle(
                                       fontFamily: "WorkSansSemiBold",
                                       fontSize: 16.0,

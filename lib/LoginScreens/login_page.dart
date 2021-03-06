@@ -1,4 +1,3 @@
-// import 'package:charitable/screens/login_helper.dart';
 import 'package:charitable/LoginScreens/login_helper.dart';
 import 'package:charitable/screens/home.dart';
 import 'package:charitable/screens/profile.dart';
@@ -7,8 +6,6 @@ import 'package:charitable/utils/bubble_indication_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:lib/style/theme.dart' as Theme;
-// import 'package:lib/utils/bubble_indication_painter.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -90,15 +87,6 @@ class _LoginPageState extends State<LoginPage>
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  // Padding(
-                  //   padding: EdgeInsets.only(top: 75.0),
-                  //   child: new Image(
-                  //       width: 250.0,
-                  //       height: 191.0,
-                  //       fit: BoxFit.fill,
-                  //       image: new AssetImage('assets/img/login_logo.png')),
-                  // ),
-
                   Container(
                     margin: EdgeInsets.only(top: 13),
                     child: Center(
@@ -363,20 +351,7 @@ class _LoginPageState extends State<LoginPage>
                       if (loginemail != null &&
                           loginpassword != null &&
                           loginemail.contains("@")) {
-                        // String value = await LoginHelper.signInwithEmail(
-                        //     loginEmailController.text,
-                        //     loginPasswordController.text);
                         print(loginemail + loginpassword);
-                        // if (value != 'No user found for that email.' &&
-                        //     value != 'Wrong password provided for that user.') {
-                        //   Navigator.of(context)
-                        //       .pushReplacement(MaterialPageRoute(
-                        //           builder: (context) => HomePage(
-                        //                 cName: [loginEmailController.text],
-                        //               )));
-                        // } else {
-                        //   print(value);
-                        // }
                       } else {
                         showInSnackBar("Email And Password required");
                       }
@@ -704,7 +679,7 @@ class _LoginPageState extends State<LoginPage>
                                   // cName: [value, signupNameController.text],
                                   )));
                         } else {
-                          print(value);
+                          showInSnackBar(value.toString());
                         }
                       } else {
                         showInSnackBar("Check Credentials again!");
@@ -716,7 +691,7 @@ class _LoginPageState extends State<LoginPage>
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
-              onTap: () => print("Clicked"),
+              onTap: () => showInSnackBar("Not Available Yet!"),
               child: Text(
                 "Register as NGO",
                 style: TextStyle(

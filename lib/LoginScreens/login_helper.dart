@@ -40,10 +40,6 @@ class LoginHelper {
         return false;
       }
     }
-    // print();
-
-    // CollectionReference users = FirebaseFirestore.instance
-    //     .collection();
   }
 
   static signInwithEmail(String email, String pass) async {

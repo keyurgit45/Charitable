@@ -30,25 +30,29 @@ class _ProfilePageState extends State<ProfilePage> {
 
   onPressed() async {
     print("clicked");
-    SharedPreferences sharedPref = await SharedPreferences.getInstance();
+    if (_phone != null && _address != null && username != null) {
+      SharedPreferences sharedPref = await SharedPreferences.getInstance();
 
-    sharedPref.setString("contact", _phone);
-    sharedPref.setString("name", username);
-    // print(sharedPref.getString("email"));
-    CollectionReference users =
-        FirebaseFirestore.instance.collection(useremail);
-    users.add({
-      'Name': username,
-      'Email': useremail,
-      'Contact Number': _phone,
-      'Address': _address,
-      'City': _city,
-      'isIdUploaded': false
-    }).then((value) {
-      print("User Added");
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
-    }).catchError((error) => print("Failed to add user: $error"));
+      sharedPref.setString("contact", _phone);
+      sharedPref.setString("name", username);
+      // print(sharedPref.getString("email"));
+      CollectionReference users =
+          FirebaseFirestore.instance.collection(useremail);
+      users.add({
+        'Name': username,
+        'Email': useremail,
+        'Contact Number': _phone,
+        'Address': _address,
+        'City': _city,
+        'isIdUploaded': false
+      }).then((value) {
+        print("User Added");
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+      }).catchError((error) => print("Failed to add user: $error"));
+    } else {
+      showInSnackBar("Complete your profile First!");
+    }
   }
 
   getnameandemail() async {
@@ -125,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white,
                         size: 22.0,
                       ),
-                      hintText: username == "Null" ? "Name" : username,
+                      hintText: username == "Null" ? "Full Name*" : username,
                       // widget.cName[1] == null ? "Null" : widget.cName[1],
                       hintStyle: TextStyle(
                           color: Colors.white,
@@ -181,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white,
                         size: 25.0,
                       ),
-                      hintText: "Contact Number",
+                      hintText: "Contact Number*",
                       hintStyle: TextStyle(
                           color: Colors.white,
                           fontFamily: "WorkSansSemiBold",
@@ -210,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.white,
                         size: 22.0,
                       ),
-                      hintText: "Address",
+                      hintText: "Address*",
                       hintStyle: TextStyle(
                           color: Colors.white,
                           fontFamily: "WorkSansSemiBold",
@@ -262,7 +266,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                       child: InkWell(
                         onTap: () {
-                          showInSnackBar("Not necessary as this is for demo ");
+                          showInSnackBar(
+                              "Not Available as this app is for demo purpose only");
                         },
                         child: Text(
                           "Upload Id Proof \n(Adhar Card/Pan Card/Voter Id)",
