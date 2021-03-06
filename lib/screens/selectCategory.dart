@@ -32,7 +32,7 @@ class SelectCategory extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CategoryBlock(
-                        context, "Houseold", "lib/assets/houseold.png"),
+                        context, "Household", "lib/assets/houseold.png"),
                     CategoryBlock(context, "Clothes", "lib/assets/clothes3.png")
                   ]),
               Row(

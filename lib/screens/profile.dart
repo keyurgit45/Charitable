@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   String _phone;
   String username;
   String useremail;
@@ -60,6 +60,13 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  void showInSnackBar(String value) {
+    // ignore: deprecated_member_use
+    _scaffoldKey.currentState
+        // ignore: deprecated_member_use
+        .showSnackBar(new SnackBar(content: new Text(value)));
+  }
+
   @override
   void initState() {
     getnameandemail();
@@ -69,6 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SafeArea(
           child: Center(
               child: Container(
@@ -95,17 +103,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       fontWeight: FontWeight.bold,
                       fontSize: 25),
                 ),
-                // ElevatedButton(
-                //     onPressed: () async {
-                //       SharedPreferences sharedPreferences =
-                //           await SharedPreferences.getInstance();
-                //       sharedPreferences.clear();
-                //       // ignore: deprecated_member_use
-                //       sharedPreferences.commit();
-                //       // ignore: deprecated_member_use
-                //       // Navigator.of(context).pop();
-                //     },
-                //     child: Text("Logout")),
                 Padding(
                   padding: EdgeInsets.only(
                       top: 20.0, bottom: 10.0, left: 25.0, right: 25.0),
@@ -263,15 +260,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                      child: Text(
-                        "Upload Id Proof \n(Adhar Card/Pan Card/Voter Id)",
-                        softWrap: true,
-                        style: TextStyle(fontSize: 17, color: Colors.white),
+                      child: InkWell(
+                        onTap: () {
+                          showInSnackBar("Not necessary as this is for demo ");
+                        },
+                        child: Text(
+                          "Upload Id Proof \n(Adhar Card/Pan Card/Voter Id)",
+                          softWrap: true,
+                          style: TextStyle(fontSize: 17, color: Colors.white),
+                        ),
                       ),
                     ),
                   ],
                 ),
-
                 Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: MaterialButton(

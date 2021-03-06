@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:charitable/screens/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +49,7 @@ class _MainPageState extends State<MainPage> {
           MaterialPageRoute(builder: (BuildContext context) => Home()));
     }
     print(sharedPreferences.getString("token"));
-    sleep(Duration(seconds: 1));
+    // sleep(Duration(seconds: 1));
 
     // sharedPreferences.clear();
   }
